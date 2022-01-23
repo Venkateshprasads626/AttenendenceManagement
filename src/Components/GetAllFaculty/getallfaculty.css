@@ -1,0 +1,29 @@
+.action-btn{
+    text-transform: capitalize !important;
+    min-width: 50px !important;
+    padding: 4px 5px !important;
+    margin: 3px !important;
+}
+
+#page-content{
+    margin-top: 100px;
+}
+.text1{
+   
+    margin-left: 50px !important;
+}
+.add-btn{
+    float: left;
+    margin-left: 100px !important;
+}
+
+.table-container{
+    width: 95% !important;
+    margin: 0 auto;
+    margin-top: 10px !important;
+    margin-bottom: 100px;
+}
+
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper{
+    max-width: 100% !important;
+}

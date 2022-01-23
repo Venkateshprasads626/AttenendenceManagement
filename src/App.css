@@ -1,0 +1,57 @@
+.App {
+  text-align: center;
+}
+body{
+  background-color: rgb(242, 245, 249);
+  color: rgb(34, 51, 84);
+    font-size: 14px;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-weight: 400;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+.header1{
+  background-color: white !important;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.css-11b3ww9-MuiPaper-root-MuiAppBar-root{
+  background-color: white !important;
+}
+
+a{
+  color: black !important;
+}
