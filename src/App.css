@@ -13,9 +13,7 @@ body{
   height: 40vmin;
   pointer-events: none;
 }
-.header1{
-  background-color: white !important;
-}
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -53,5 +51,6 @@ body{
 }
 
 a{
-  color: black !important;
+  margin: 5px;
+  text-transform: capitalize !important;
 }

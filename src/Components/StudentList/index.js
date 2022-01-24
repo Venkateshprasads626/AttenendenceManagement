@@ -1,12 +1,15 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import Header3 from '../../Components/Header3'
+import Header from '../../Components/Header'
 import Footer from '../../Components/Footer'
 import {Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Paper,Button, Search,Card} from '@mui/material'
 import PersonAdd from'@mui/icons-material/PersonAdd';
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import AddStudent from '../AddStudent'
 import './studentlist.css'
+import UpdateStudent from '../UpdateStudent';
 
 
 const StudentList = () => {
@@ -14,7 +17,7 @@ const StudentList = () => {
     const [student, setStudent] = useState([]);
     useEffect(()=>{
         getStudents();
-    },[])
+    },[deleteStudent])
 
 
 
@@ -38,6 +41,7 @@ const StudentList = () => {
     }
 
     const [open, setOpen] = React.useState(false);
+    const[open1, setOpen1] = React.useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -45,13 +49,19 @@ const StudentList = () => {
     const handleClose = () => {
         setOpen(false);
     };
+    const handleClickOpen1 = () => {
+        setOpen1(true);
+    };
+    const handleClose1 = () => {
+        setOpen1(false);
+    };
     
     
 
 
     return (
         <div id="site-wrapper">
-            <Header3 />
+            <Header />
                 <div id="page-content">
                 <Card sx={{padding: '10px',width:'100%',margin:'0 auto'}}>
                     <Button onClick={handleClickOpen} variant="outlined" color="secondary" className="add-btn"  startIcon={<PersonAdd />}>
@@ -80,15 +90,11 @@ const StudentList = () => {
                                     <TableCell align="center">First Name</TableCell>
                                     <TableCell align="center">Last Name</TableCell>
                                     <TableCell align="center">DOB</TableCell>
-                                    <TableCell align="center">Gender</TableCell>
                                     <TableCell align="center">Mobile No</TableCell>
-                                    <TableCell align="center">Coure ID</TableCell>
                                     <TableCell align="center">Course Name</TableCell>
-                                    <TableCell align="center">Subject Id</TableCell>
                                     <TableCell align="center">Subject Name</TableCell>
                                     <TableCell align="center">Semester</TableCell>
                                     <TableCell align="center">Email</TableCell>
-                                    <TableCell align="center">Father Email</TableCell>
                                     <TableCell align="center">Father MobileNo</TableCell>
                                     <TableCell align="center">Actions</TableCell>
                                 </TableRow>
@@ -103,20 +109,19 @@ const StudentList = () => {
                                                     <TableCell align="center">{student.firstName}</TableCell>
                                                     <TableCell align="center">{student.lastName}</TableCell>
                                                     <TableCell align="center">{student.dob}</TableCell>
-                                                    <TableCell align="center">{student.gender}</TableCell>
                                                     <TableCell align="center">{student.mobileNo}</TableCell>
-                                                    <TableCell align="center">{student.courseId}</TableCell>
+                                                   
                                                     <TableCell align="center">{student.courseName}</TableCell>
-                                                    <TableCell align="center">{student.subjectId}</TableCell>
+                                                   
                                                     <TableCell align="center">{student.subjectName}</TableCell>
                                                     <TableCell align="center">{student.semester}</TableCell>
                                                     <TableCell align="center">{student.emailId}</TableCell>
-                                                    <TableCell align="center">{student.fatherEmailId}</TableCell>
+                                                  
                                                     <TableCell align="center">{student.fatherMobileNo}</TableCell>
                                                     <TableCell align="center">
-                                                        <Button  size="small" variant="contained" color="error" onClick={()=>deleteStudent(student.id)}>Delete</Button>
-                                                        <Button  size="small" variant="contained" className="action-btn">Update</Button>
-                                                    </TableCell>
+                                                        <Button className="delete-btn" variant="contained" color="error" onClick={()=>deleteStudent(student.id)}  startIcon={<DeleteIcon className="delete-icon1"/>} style={{padding:'2px'}}></Button>
+                                                        <Button  className="edit-btn" size="small" variant="contained" className="action-btn" startIcon={<EditIcon className="edit-icon1"/>} style={{padding:'2px'}}onClick={handleClickOpen1}></Button>
+                                                    </TableCell> 
 
                                                 </TableRow>
                                             </TableBody>
@@ -127,7 +132,19 @@ const StudentList = () => {
 
                         </Table>
                 </TableContainer>
-                
+                <Dialog className="dialog-box"
+                    open={open1}
+                    onClose={handleClose1}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">
+                        Update Student Record
+                    </DialogTitle>
+                    <DialogContent>
+                        <UpdateStudent />
+                    </DialogContent>
+                </Dialog>
                 
                 </div>
             <Footer />

@@ -3,8 +3,9 @@ import { InputLabel,MenuItem,Select } from '@mui/material';
 import React, { useState } from 'react'
 
 
-const AddStudent = () =>{
+const UpdateStudent = () =>{
 
+    const[id,setId]=useState('')
     const[rollNo, setRollNo]=useState('')
     const[firstName, setFirstName]=useState('')
     const[lastName, setLastName]=useState('')
@@ -26,8 +27,8 @@ const AddStudent = () =>{
         const student={rollNo,firstName,lastName,dob,mobileNo,courseId,courseName,subjectId,subjectName,semester,emailId,fatherEmailId,fatherMobileNo}
         console.log(student)
 
-        fetch("http://localhost:8080/api/addStudent",{
-            method:"POST",
+        fetch("http://localhost:8080/api/updateStudent",{
+            method:"PUT",
             headers:{"Content-Type":"application/json"},
             body:JSON.stringify(student)
         }).then(()=>{
@@ -40,6 +41,13 @@ const AddStudent = () =>{
        
         <div>
             <form className="add-student-form">
+                <TextField type="number" margin="normal" 
+                    fullWidth name="id" label="Student Id"  
+                    placeholder='Enter Your Id'
+                    id="id"
+                    value={id}
+                    onChange={(e)=>setId(e.target.value)}
+                />
                 <TextField type="number" margin="normal" 
                     fullWidth name="rollId" label="Roll No"  
                     placeholder='Enter Your Roll Number'
@@ -68,7 +76,7 @@ const AddStudent = () =>{
                     label="Date Of Birth"
                     type="date"
                     name="date"
-                    inputProps={{ max: "2022-01-24" }} 
+                    inputProps={{ max: "2022-01-21" }} 
                     fullWidth
                     defaultValue="0000-00-00"
                     InputLabelProps={{
@@ -162,4 +170,4 @@ const AddStudent = () =>{
     )
 }
 
-export default AddStudent
+export default UpdateStudent

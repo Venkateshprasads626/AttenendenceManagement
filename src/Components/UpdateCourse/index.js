@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 
 const AddCourse = () =>{
 
+    const[id,setId]=useState('')
     const[name, setName]=useState('')
     const[description, setDescription]=useState('')
 
@@ -18,18 +19,19 @@ const AddCourse = () =>{
         const isValid = formValidation();
         //checking validation
         if(isValid) {
-            const course={name,description}
+            const course={id,name,description}
             console.log(course)
 
            //Fetching data using api
-            fetch("http://localhost:8080/api/addCourse",{
-                method:"POST",
+            fetch("http://localhost:8080/api/updateCourse",{
+                method:"PUT",
                 headers:{"Content-Type":"application/json"},
                 body:JSON.stringify(course)
             }).then(()=>{
-                alert(`New Course added!!`)
+                alert(`New Course Updated!!`)
             })
             
+            setId("");
             setName("");
             setDescription("");
         }
@@ -46,7 +48,7 @@ const AddCourse = () =>{
             isValid = false;
         }
 
-        if(description.trim().length > 10){
+        if(description.trim().length > 20){
             descriptionErr.descriptionShort =  "Description too long"
             isValid = false;
         }
@@ -62,6 +64,14 @@ const AddCourse = () =>{
        
         <div>
             <form className="add-course-form" onSubmit={handleSubmit}>
+                <TextField type="number" margin="normal" 
+                    fullWidth name="password" label="Course Id"  
+                    placeholder='Enter Course Id'
+                    id="id"
+                    value={id}
+                    onChange={(e)=>setId(e.target.value)}
+                />
+
                 <TextField type="text" margin="normal" 
                     fullWidth name="name" label="Course Name"  
                     placeholder='Enter Course Name'

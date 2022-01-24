@@ -5,15 +5,16 @@ import {Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Paper,Button
 import PersonAdd from'@mui/icons-material/PersonAdd';
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import AddAttendence from '../AddAttendence';
-
-
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import UpdateAttendence from '../UpdateAttendence';
 
 const AttendenceList = () => {
     
     const [attendence, setAttendence] = useState([]);
     useEffect(()=>{
         getAttendences();
-    },[])
+    },[deleteAttendence])
 
 
 
@@ -37,6 +38,7 @@ const AttendenceList = () => {
     }
 
     const [open, setOpen] = React.useState(false);
+    const[open1, setOpen1] = React.useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -44,7 +46,12 @@ const AttendenceList = () => {
     const handleClose = () => {
         setOpen(false);
     };
-    
+    const handleClickOpen1 = () => {
+        setOpen1(true);
+    };
+    const handleClose1 = () => {
+        setOpen1(false);
+    };
     
 
 
@@ -107,9 +114,9 @@ const AttendenceList = () => {
                                                     <TableCell align="center">{attendence.courseId}</TableCell>
                                                     <TableCell align="center">{attendence.courseName}</TableCell>
                                                     <TableCell align="center">
-                                                        <Button  size="small" variant="contained" color="error" onClick={()=>deleteAttendence(attendence.id)}>Delete</Button>
-                                                        <Button  size="small" variant="contained" className="action-btn">Update</Button>
-                                                    </TableCell>
+                                                        <Button className="delete-btn" variant="contained" color="error" onClick={()=>deleteAttendence(attendence.id)} startIcon={<DeleteIcon className="delete-icon1"/>} style={{padding:'2px'}}></Button>
+                                                        <Button  className="edit-btn" size="small" variant="contained" className="action-btn" startIcon={<EditIcon className="edit-icon1"/>} style={{padding:'2px'}} onClick={handleClickOpen1}></Button>
+                                                    </TableCell> 
 
                                                 </TableRow>
                                             </TableBody>
@@ -118,7 +125,19 @@ const AttendenceList = () => {
                                 }
                         </Table>
                 </TableContainer>
-                
+                <Dialog className="dialog-box"
+                    open={open1}
+                    onClose={handleClose1}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">
+                        Update User
+                    </DialogTitle>
+                    <DialogContent>
+                        <UpdateAttendence />
+                    </DialogContent>
+                </Dialog>
                 
                 </div>
             <Footer />

@@ -5,6 +5,7 @@ import {Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Paper,Button
 import PersonAdd from'@mui/icons-material/PersonAdd';
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import AddCourse from '../AddCourse';
+import UpdateCourse from '../UpdateCourse'
 
 
 
@@ -13,7 +14,7 @@ const CourseList = () => {
     const [course, setCourse] = useState([]);
     useEffect(()=>{
         getCourses();
-    },[])
+    },[deleteCourse])
 
 
 
@@ -37,6 +38,7 @@ const CourseList = () => {
     }
 
     const [open, setOpen] = React.useState(false);
+    const[open1, setOpen1] = React.useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -44,6 +46,13 @@ const CourseList = () => {
     const handleClose = () => {
         setOpen(false);
     };
+    const handleClickOpen1 = () => {
+        setOpen1(true);
+    };
+    const handleClose1 = () => {
+        setOpen1(false);
+    };
+
     
     
 
@@ -90,8 +99,9 @@ const CourseList = () => {
                                                     <TableCell align="center">{course.description}</TableCell>
                                                     <TableCell align="center">
                                                         <Button  size="small" variant="contained" color="error" onClick={()=>deleteCourse(course.id)}>Delete</Button>
-                                                        <Button  size="small" variant="contained" className="action-btn">Update</Button>
+                                                        <Button  size="small" variant="contained" className="action-btn" onClick={handleClickOpen1}>Update</Button>
                                                     </TableCell>
+                                                    
 
                                                 </TableRow>
                                             </TableBody>
@@ -102,6 +112,20 @@ const CourseList = () => {
 
                         </Table>
                 </TableContainer>
+
+                <Dialog className="dialog-box"
+                    open={open1}
+                    onClose={handleClose1}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">
+                        Update User
+                    </DialogTitle>
+                    <DialogContent>
+                        <UpdateCourse />
+                    </DialogContent>
+                </Dialog>
                 
                 
                 </div>

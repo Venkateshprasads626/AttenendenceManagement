@@ -8,32 +8,50 @@ import './getallfaculty.css'
 import PersonAdd from'@mui/icons-material/PersonAdd';
 import { Dialog, DialogContent, DialogTitle, DialogContentText } from '@mui/material';
 import AddUser from '../../Components/AddUser';
-
-
-
-
-const baseURL = `http://localhost:8080/api/getUserByroleId`;
-
-
+import UpdateUser from '../../Components/UpdateUser'
 
 
 const GetAllFaculty = () => {
     
     const [user, setUser] = useState([]);
     useEffect( () => {
-        axios.get(baseURL).then( response => {
-        setUser(response.data);
-        console.log(response.data);
+       getFaculty();
+    }, [deleteFaculty]);
+
+    function getFaculty(){
+        fetch("http://localhost:8080/api/getUserByroleId").then((result)=>{
+            result.json().then((resp)=>{
+                setUser(resp)
+            })
         })
-    }, []);
+    }
+
+    function deleteFaculty(id){
+        fetch(`http://localhost:8080/api/deleteUser/${id}`,{
+            method:'DELETE'
+        }).then((result)=>{
+            result.json().then((resp)=>{
+                console.warn(resp)
+                getFaculty();
+                
+            })
+        })
+    }
 
     const [open, setOpen] = React.useState(false);
+    const[open1, setOpen1] = React.useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
     };
     const handleClose = () => {
         setOpen(false);
+    };
+    const handleClickOpen1 = () => {
+        setOpen1(true);
+    };
+    const handleClose1 = () => {
+        setOpen1(false);
     };
     
     
@@ -69,7 +87,6 @@ const GetAllFaculty = () => {
                                     <TableCell align="center">First Name</TableCell>
                                     <TableCell align="center">Last Name</TableCell>
                                     <TableCell align="center">Date Of Birth</TableCell>
-                                    <TableCell align="center">Gender</TableCell>
                                     <TableCell align="center">Mobile No</TableCell>
                                     <TableCell align="center">Login Id</TableCell>
                                     <TableCell align="center">Password</TableCell>
@@ -86,15 +103,15 @@ const GetAllFaculty = () => {
                                                     <TableCell align="center">{user.firstName}</TableCell>
                                                     <TableCell align="center">{user.lastName}</TableCell>
                                                     <TableCell align="center">{user.dob}</TableCell>
-                                                    <TableCell align="center">{user.gender}</TableCell>
                                                     <TableCell align="center">{user.mobileNo}</TableCell>
                                                     <TableCell align="center">{user.login}</TableCell>
                                                     <TableCell align="center">{user.password}</TableCell>
                                                     <TableCell align="center">{user.roleId}</TableCell>
                                                     <TableCell align="center">
-                                                        <Button  size="small" variant="contained" color="error">Delete</Button>
-                                                        <Button  size="small" variant="contained" className="action-btn">Update</Button>
+                                                        <Button  size="small" variant="contained" color="error" onClick={()=>deleteFaculty(user.id)}>Delete</Button>
+                                                        <Button  size="small" variant="contained" className="action-btn" onClick={handleClickOpen1}>Update</Button>
                                                     </TableCell>
+                                                    
 
                                                 </TableRow>
                                             </TableBody>
@@ -105,6 +122,19 @@ const GetAllFaculty = () => {
 
                         </Table>
                 </TableContainer>
+                <Dialog className="dialog-box"
+                    open={open1}
+                    onClose={handleClose1}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">
+                        Update User
+                    </DialogTitle>
+                    <DialogContent>
+                        <UpdateUser />
+                    </DialogContent>
+                </Dialog>  
                 
                 
                 </div>

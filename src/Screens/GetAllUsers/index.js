@@ -16,7 +16,7 @@ function GetAllUsers(){
     
     useEffect(()=>{
         getUsers();
-    },[])
+    },[deleteUser])
 
     function getUsers(){
         fetch("http://localhost:8080/api/getUsers").then((result)=>{
@@ -87,7 +87,6 @@ function GetAllUsers(){
                                     <TableCell align="center">First Name</TableCell>
                                     <TableCell align="center">Last Name</TableCell>
                                     <TableCell align="center">Date Of Birth</TableCell>
-                                    <TableCell align="center">Gender</TableCell>
                                     <TableCell align="center">Mobile No</TableCell>
                                     <TableCell align="center">Login Id</TableCell>
                                     <TableCell align="center">Password</TableCell>
@@ -104,7 +103,6 @@ function GetAllUsers(){
                                                     <TableCell align="center">{user.firstName}</TableCell>
                                                     <TableCell align="center">{user.lastName}</TableCell>
                                                     <TableCell align="center">{user.dob}</TableCell>
-                                                    <TableCell align="center">{user.gender}</TableCell>
                                                     <TableCell align="center">{user.mobileNo}</TableCell>
                                                     <TableCell align="center">{user.login}</TableCell>
                                                     <TableCell align="center">{user.password}</TableCell>

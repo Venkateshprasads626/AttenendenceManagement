@@ -38,7 +38,6 @@ const StudentList2 = () => {
                                     <TableCell align="center">First Name</TableCell>
                                     <TableCell align="center">Last Name</TableCell>
                                     <TableCell align="center">DOB</TableCell>
-                                    <TableCell align="center">Gender</TableCell>
                                     <TableCell align="center">Mobile No</TableCell>
                                     <TableCell align="center">Coure ID</TableCell>
                                     <TableCell align="center">Course Name</TableCell>
@@ -60,7 +59,7 @@ const StudentList2 = () => {
                                                     <TableCell align="center">{student.firstName}</TableCell>
                                                     <TableCell align="center">{student.lastName}</TableCell>
                                                     <TableCell align="center">{student.dob}</TableCell>
-                                                    <TableCell align="center">{student.gender}</TableCell>
+                                                   
                                                     <TableCell align="center">{student.mobileNo}</TableCell>
                                                     <TableCell align="center">{student.courseId}</TableCell>
                                                     <TableCell align="center">{student.courseName}</TableCell>

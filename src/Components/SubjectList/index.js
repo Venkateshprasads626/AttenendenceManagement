@@ -5,6 +5,7 @@ import {Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Paper,Button
 import PersonAdd from'@mui/icons-material/PersonAdd';
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import AddSubject from '../AddSubject'
+import UpdateSubject from '../UpdateSubject'
 
 
 
@@ -13,7 +14,7 @@ const SubjectList = () => {
     const [subject, setSubject] = useState([]);
     useEffect(()=>{
         getSubjects();
-    },[])
+    },[deleteSubject])
 
 
 
@@ -37,6 +38,7 @@ const SubjectList = () => {
     }
 
     const [open, setOpen] = React.useState(false);
+    const[open1, setOpen1] = React.useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -44,8 +46,12 @@ const SubjectList = () => {
     const handleClose = () => {
         setOpen(false);
     };
-    
-    
+    const handleClickOpen1 = () => {
+        setOpen1(true);
+    };
+    const handleClose1 = () => {
+        setOpen1(false);
+    };
 
 
     return (
@@ -96,7 +102,7 @@ const SubjectList = () => {
                                                     <TableCell align="center">{subject.course.id}</TableCell>
                                                     <TableCell align="center">
                                                         <Button  size="small" variant="contained" color="error" onClick={()=>deleteSubject(subject.id)}>Delete</Button>
-                                                        <Button  size="small" variant="contained" className="action-btn">Update</Button>
+                                                        <Button  size="small" variant="contained" className="action-btn" onClick={handleClickOpen1}>Update</Button>
                                                     </TableCell>
 
                                                 </TableRow>
@@ -108,7 +114,19 @@ const SubjectList = () => {
 
                         </Table>
                 </TableContainer>
-                
+                <Dialog className="dialog-box"
+                    open={open1}
+                    onClose={handleClose1}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">
+                        Update Subject Record
+                    </DialogTitle>
+                    <DialogContent>
+                        <UpdateSubject />
+                    </DialogContent>
+                </Dialog>
                 
                 </div>
             <Footer />

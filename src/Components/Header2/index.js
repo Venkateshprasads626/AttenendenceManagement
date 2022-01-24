@@ -8,7 +8,7 @@ class Header2 extends Component{
             <Container>
                 <AppBar className="haeader1">
                     <Toolbar>
-                        <Typography variant='h6' style={{ flexGrow: 1, textAlign:'start' }}>
+                        <Typography variant='h6' style={{ flexGrow: 1, textAlign:'start',color:"#ff355e" }}>
                             Attendence Management
                         </Typography>
                     </Toolbar>

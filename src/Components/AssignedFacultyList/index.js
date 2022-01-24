@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import Header3 from '../../Components/Header3'
+import Header from '../../Components/Header'
 import Footer from '../../Components/Footer'
 import {Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Paper,Button, Search,Card} from '@mui/material'
 import PersonAdd from'@mui/icons-material/PersonAdd';
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import AssignFaculty from '../AssignFaculty';
-
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 
 
@@ -14,7 +15,7 @@ const AssignedFacultyList = () => {
     const [assign_faculty, setAssign_Faculty] = useState([]);
     useEffect(()=>{
         getAssignedFaculty();
-    },[])
+    },[deleteAssignFaculty])
 
 
 
@@ -51,7 +52,7 @@ const AssignedFacultyList = () => {
 
     return (
         <div id="site-wrapper">
-            <Header3 />
+            <Header />
                 <div id="page-content">
                 <Card sx={{padding: '10px',width:'100%',margin:'0 auto'}}>
                     <Button onClick={handleClickOpen} variant="outlined" color="secondary" className="add-btn"  startIcon={<PersonAdd />}>
@@ -102,9 +103,9 @@ const AssignedFacultyList = () => {
                                                     <TableCell align="center">{assign_faculty.totalClass}</TableCell>
                                                     <TableCell align="center">{assign_faculty.user.id}</TableCell>
                                                     <TableCell align="center">
-                                                        <Button  size="small" variant="contained" color="error" onClick={()=>deleteAssignFaculty(assign_faculty.id)}>Delete</Button>
-                                                        <Button  size="small" variant="contained" className="action-btn">Update</Button>
-                                                    </TableCell>
+                                                        <Button className="delete-btn" variant="contained" color="error" onClick={()=>deleteAssignFaculty(assign_faculty.id)}  startIcon={<DeleteIcon className="delete-icon1"/>} style={{padding:'2px'}}></Button>
+                                                        <Button  className="edit-btn" size="small" variant="contained" className="action-btn" startIcon={<EditIcon className="edit-icon1"/>} style={{padding:'2px'}}></Button>
+                                                    </TableCell> 
 
                                                 </TableRow>
                                             </TableBody>
